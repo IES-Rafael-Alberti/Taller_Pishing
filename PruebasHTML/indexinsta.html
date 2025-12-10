@@ -2,8 +2,9 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/png" href="/PruebasHTML/img/instalogo.jpg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Instagram Login Dark</title>
+<title>Instagram</title>
 <style>
 * { box-sizing: border-box; }
 
@@ -26,7 +27,6 @@ body {
     align-items: center;
 }
 
-/* Zona central */
 .main-content {
     display: flex;
     justify-content: center;
@@ -34,10 +34,9 @@ body {
     gap: 70px;
     flex-wrap: wrap;
     margin-top: 110px;
-    margin-bottom: 20px; /* footer más cerca */
+    margin-bottom: 20px;
 }
 
-/* Imagen izquierda reducida */
 .left-side {
     width: 500px;
     height: 450px;
@@ -67,15 +66,14 @@ body {
 }
 
 .login-box img {
-    width: 190px;       /* logo más grande */
-    margin-bottom: 6px; /* casi pegado al formulario */
+    width: 190px;
+    margin-bottom: 6px;
 }
 
-/* Inputs */
 .login-box input {
     width: 100%;
     height: 32px;
-    margin-bottom: 6px; /* muy poco espacio */
+    margin-bottom: 6px;
     padding: 0 8px;
     background-color: #1e1e1e;
     border: 1px solid #333;
@@ -88,7 +86,6 @@ body {
 .login-box input::placeholder { color: #a9a9a9; }
 .login-box input:focus { border-color: #555; }
 
-/* Botón Entrar */
 .login-box button.login-btn {
     width: 100%;
     height: 32px;
@@ -106,7 +103,6 @@ body {
     background-color: #4a54c9;
 }
 
-/* Separador "o" */
 .divider {
     display: flex;
     align-items: center;
@@ -115,15 +111,13 @@ body {
     color: #888;
     font-size: 14px;
 }
-.divider::before, .divider::after {
-    content: '';
+.divider::before, .divider::after { 
     flex: 1;
     border-bottom: 1px solid #333;
 }
 .divider:not(:empty)::before { margin-right: 8px; }
 .divider:not(:empty)::after  { margin-left: 8px; }
 
-/* Botón Facebook */
 .facebook-login {
     width: 100%;
     height: 31px;
@@ -138,9 +132,13 @@ body {
     cursor: pointer;
     margin-bottom: 10px;
 }
-.facebook-login span { margin-right: 6px; }
+.facebook-login .fb-icon {
+    width: 40px;       /* tamaño exacto del círculo */
+    height: 40px;
+    display: inline-block;
+    vertical-align: middle;
+}
 
-/* Footer del login */
 .login-footer {
     font-size: 14px;
     color: #a9a9a9;
@@ -148,16 +146,14 @@ body {
 }
 .login-footer p { margin: 6px 0; }
 
-/* “¿Has olvidado la contraseña?” */
 .login-footer p:first-child a {
     color: #FFFFFF;
     text-decoration: none;
 }
 .login-footer p:first-child {
-    margin-bottom: 22px; /* más espacio */
+    margin-bottom: 22px;
 }
 
-/* “Denunciar contenido” */
 .login-footer p:nth-child(2) a {
     color: #5865F2;
     font-weight: bold;
@@ -167,12 +163,11 @@ body {
     text-decoration: underline;
 }
 .login-footer p:nth-child(2) {
-    margin-bottom: 22px; /* más espacio */
+    margin-bottom: 22px;
 }
 
-/* “¿No tienes una cuenta? Regístrate” */
 .login-footer p:last-child {
-    margin-top: 26px; /* más espacio */
+    margin-top: 26px;
     font-size: 14px;
 }
 .login-footer p:last-child a {
@@ -181,7 +176,6 @@ body {
     text-decoration: none;
 }
 
-/* Footer inferior */
 footer {
     background-color: #121212;
     padding: 6px 20px;
@@ -190,9 +184,9 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: auto; /* se queda al final */
+    margin-top: auto;
     position: relative;
-    bottom: 10px;     /* lo subimos un poco */
+    bottom: 10px;
 }
 footer .links-row {
     display: flex;
@@ -233,7 +227,8 @@ footer .secondary {
                 <div class="divider">o</div>
 
                 <button class="facebook-login">
-                    <span>f</span> Iniciar sesión con Facebook
+                    <img src="/PruebasHTML/img/logofb.png" alt="Facebook Logo" class="fb-icon">
+                    Iniciar sesión con Facebook
                 </button>
 
                 <div class="login-footer">
