@@ -3,33 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Instagram Login Dark Transparent</title>
+<title>Instagram Login Dark</title>
 <style>
+* { box-sizing: border-box; }
+
 body {
     background-color: #121212;
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0 0 100px 0; /* espacio para el footer */
+    padding: 0;
     color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Zona central */
+.main-content {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    gap: 50px;
+    gap: 70px;
     flex-wrap: wrap;
+    margin-top: 110px;
+    margin-bottom: 20px; /* footer más cerca */
 }
 
+/* Imagen izquierda reducida */
 .left-side {
-    position: relative;
-    width: 380px;
+    width: 500px;
+    height: 450px;
     max-width: 90vw;
 }
-
 .left-side img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
     border-radius: 10px;
 }
 
@@ -37,7 +54,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
 }
 
 .login-box {
@@ -45,42 +61,39 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px 40px 30px 40px;
+    padding: 12px 28px;
     border-radius: 4px;
     background-color: transparent;
 }
 
 .login-box img {
-    width: 175px;
-    margin-bottom: 20px;
+    width: 190px;       /* logo más grande */
+    margin-bottom: 6px; /* casi pegado al formulario */
 }
 
+/* Inputs */
 .login-box input {
     width: 100%;
-    height: 36px;
-    margin-bottom: 6px;
+    height: 32px;
+    margin-bottom: 6px; /* muy poco espacio */
     padding: 0 8px;
     background-color: #1e1e1e;
     border: 1px solid #333;
     border-radius: 3px;
     color: white;
     font-size: 14px;
+    line-height: 32px;
     outline: none;
 }
+.login-box input::placeholder { color: #a9a9a9; }
+.login-box input:focus { border-color: #555; }
 
-.login-box input::placeholder {
-    color: #a9a9a9;
-}
-
-.login-box input:focus {
-    border-color: #555;
-}
-
+/* Botón Entrar */
 .login-box button.login-btn {
     width: 100%;
     height: 32px;
     margin-top: 8px;
-    background-color: #5555ff;
+    background-color: #5865F2;
     border: none;
     border-radius: 4px;
     font-weight: bold;
@@ -89,121 +102,114 @@ body {
     cursor: pointer;
     transition: 0.3s;
 }
-
 .login-box button.login-btn:hover {
-    background-color: #4343d8;
+    background-color: #4a54c9;
 }
 
+/* Separador "o" */
 .divider {
     display: flex;
     align-items: center;
     text-align: center;
-    margin: 20px 0;
+    margin: 12px 0;
     color: #888;
-    font-size: 13px;
+    font-size: 14px;
 }
-
 .divider::before, .divider::after {
     content: '';
     flex: 1;
     border-bottom: 1px solid #333;
 }
+.divider:not(:empty)::before { margin-right: 8px; }
+.divider:not(:empty)::after  { margin-left: 8px; }
 
-.divider:not(:empty)::before {
-    margin-right: 10px;
-}
-
-.divider:not(:empty)::after {
-    margin-left: 10px;
-}
-
+/* Botón Facebook */
 .facebook-login {
     width: 100%;
-    height: 32px;
+    height: 31px;
     background: none;
     border: none;
     color: #1877f2;
     font-weight: bold;
+    font-size: 14px;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
+.facebook-login span { margin-right: 6px; }
 
-.facebook-login span {
-    margin-right: 8px;
-}
-
+/* Footer del login */
 .login-footer {
-    font-size: 12px;
+    font-size: 14px;
     color: #a9a9a9;
     text-align: center;
 }
+.login-footer p { margin: 6px 0; }
 
-.login-footer a {
-    color: #96a2f6cb;
+/* “¿Has olvidado la contraseña?” */
+.login-footer p:first-child a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+.login-footer p:first-child {
+    margin-bottom: 22px; /* más espacio */
+}
+
+/* “Denunciar contenido” */
+.login-footer p:nth-child(2) a {
+    color: #5865F2;
+    font-weight: bold;
+    text-decoration: none;
+}
+.login-footer p:nth-child(2) a:hover {
+    text-decoration: underline;
+}
+.login-footer p:nth-child(2) {
+    margin-bottom: 22px; /* más espacio */
+}
+
+/* “¿No tienes una cuenta? Regístrate” */
+.login-footer p:last-child {
+    margin-top: 26px; /* más espacio */
+    font-size: 14px;
+}
+.login-footer p:last-child a {
+    color: #5865F2;
+    font-weight: bold;
     text-decoration: none;
 }
 
-.login-footer p {
-    margin: 5px 0;
-}
-
-.signup-box {
-    width: 350px;
-    padding: 20px;
-    border-radius: 4px;
-    text-align: center;
-    font-size: 14px;
-    background-color: transparent;
-}
-
-@media (max-width: 900px) {
-    .container {
-        flex-direction: column;
-    }
-}
-
-/* Footer fijo */
+/* Footer inferior */
 footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
     background-color: #121212;
-    padding: 10px 20px;
-    font-size: 11px;
+    padding: 6px 20px;
+    font-size: 12px;
     color: #888;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: auto; /* se queda al final */
+    position: relative;
+    bottom: 10px;     /* lo subimos un poco */
 }
-
 footer .links-row {
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
     overflow-x: auto;
     white-space: nowrap;
 }
-
-footer .links-row a {
-    color: #888;
-    text-decoration: none;
-}
-
-footer .links-row a:hover {
-    text-decoration: underline;
-}
-
+footer .links-row a { color: #888; text-decoration: none; }
+footer .links-row a:hover { text-decoration: underline; }
 footer .secondary {
     display: flex;
     justify-content: center;
-    gap: 10px; /* espacio entre idioma y copyright */
-    margin-top: 5px;
-    line-height: 1.3;
+    gap: 6px;
+    margin-top: 4px;
+    line-height: 1.2;
 }
 </style>
 </head>
@@ -211,62 +217,60 @@ footer .secondary {
 
 <div class="container">
 
-    <div class="left-side">
-        <img src="/PruebasHTML/img/instagramimg.png" alt="Instagram Preview">
-    </div>
+    <div class="main-content">
+        <div class="left-side">
+            <img src="/PruebasHTML/img/instagramimg.png" alt="Instagram Preview">
+        </div>
 
-    <div class="right-side">
-        <div class="login-box">
-            <img src="/PruebasHTML/img/logoinsta.png" alt="Instagram Logo">
+        <div class="right-side">
+            <div class="login-box">
+                <img src="/PruebasHTML/img/logoinsta.png" alt="Instagram Logo">
 
-            <input type="text" placeholder="Teléfono, usuario o correo electrónico">
-            <input type="password" placeholder="Contraseña">
-            <button class="login-btn">Entrar</button>
+                <input type="text" placeholder="Teléfono, usuario o correo electrónico">
+                <input type="password" placeholder="Contraseña">
+                <button class="login-btn">Entrar</button>
 
-            <div class="divider">O</div>
+                <div class="divider">o</div>
 
-            <button class="facebook-login">
-                <span>f</span> Iniciar sesión con Facebook
-            </button>
+                <button class="facebook-login">
+                    <span>f</span> Iniciar sesión con Facebook
+                </button>
 
-            <div class="login-footer">
-                <p><a href="#">¿Has olvidado la contraseña?</a></p>
-                <p>También puedes <a href="#">denunciar el contenido que creas que es ilegal</a></p>
-                <p>¿No tienes una cuenta? <a href="#">Regístrate</a></p>
+                <div class="login-footer">
+                    <p><a href="#">¿Has olvidado la contraseña?</a></p>
+                    <p>También puedes <a href="denuncia.html">denunciar el contenido que creas que es ilegal</a> en tu país sin iniciar sesión</p>
+                    <p>¿No tienes una cuenta? <a href="#">Regístrate</a></p>
+                </div>
             </div>
         </div>
-
-        <div class="signup-box">
-            ¿No tienes una cuenta? <a href="#">Regístrate</a>
-        </div>
     </div>
+
+    <footer>
+        <div class="links-row">
+            <a href="#">Meta</a>
+            <a href="#">Información</a>
+            <a href="#">Blog</a>
+            <a href="#">Empleo</a>
+            <a href="#">Ayuda</a>
+            <a href="#">API</a>
+            <a href="#">Privacidad</a>
+            <a href="#">Configuración de cookies</a>
+            <a href="#">Condiciones</a>
+            <a href="#">Ubicaciones</a>
+            <a href="#">Instagram Lite</a>
+            <a href="#">Meta AI</a>
+            <a href="#">Threads</a>
+            <a href="#">Subir contactos y personas no usuarias</a>
+            <a href="#">Meta Verified</a>
+            <a href="#">Español (España)</a>
+        </div>
+        <div class="secondary">
+            <span>Español (España)</span>
+            <span>© 2025 Instagram from Meta</span>
+        </div>
+    </footer>
 
 </div>
-
-<footer>
-    <div class="links-row">
-        <a href="#">Meta</a>
-        <a href="#">Información</a>
-        <a href="#">Blog</a>
-        <a href="#">Empleo</a>
-        <a href="#">Ayuda</a>
-        <a href="#">API</a>
-        <a href="#">Privacidad</a>
-        <a href="#">Configuración de cookies</a>
-        <a href="#">Condiciones</a>
-        <a href="#">Ubicaciones</a>
-        <a href="#">Instagram Lite</a>
-        <a href="#">Meta AI</a>
-        <a href="#">Threads</a>
-        <a href="#">Subir contactos y personas no usuarias</a>
-        <a href="#">Meta Verified</a>
-        <a href="#">Español (España)</a>
-    </div>
-    <div class="secondary">
-        <span>Español (España)</span>
-        <span>© 2025 Instagram from Meta</span>
-    </div>
-</footer>
 
 </body>
 </html>
