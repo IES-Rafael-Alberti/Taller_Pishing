@@ -1,0 +1,7 @@
+# Archivos basura de Windows
+Thumbs.db
+Desktop.ini
+
+# Logs y archivos temporales (por si acaso)
+*.log
+*.tmp
