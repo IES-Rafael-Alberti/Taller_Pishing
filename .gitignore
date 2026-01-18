@@ -1,7 +1,72 @@
-# Archivos basura de Windows
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Flask
+instance/
+.webassets-cache
+
+# SQLite database
+*.db
+*.sqlite
+*.sqlite3
+phishing_data.db
+
+# Environment
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
 Thumbs.db
 Desktop.ini
 
-# Logs y archivos temporales (por si acaso)
+# Logs
 *.log
+logs/
 *.tmp
+
+# Docker
+docker-compose.override.yml
+
+# Cloudflared
+cloudflared.exe
+cloudflared/
+
+# Backup files
+*.bak
+*.backup

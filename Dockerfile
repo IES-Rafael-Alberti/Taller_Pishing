@@ -1,22 +1,23 @@
-# Usamos Debian como base
-FROM debian:latest
+﻿# Usamos una imagen ligera de Python
+FROM python:3.9-slim
 
-# Instalamos lo necesario para Zphisher
-RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    php \
-    unzip \
-    wget \
-    sudo \
-    net-tools \
-    && rm -rf /var/lib/apt/lists/*
+# Variables de entorno para que Python no buffee la salida
+ENV PYTHONUNBUFFERED=1
 
-# Descargamos Zphisher
-WORKDIR /opt
-RUN git clone https://github.com/htr-tech/zphisher.git
+# Establecemos el directorio de trabajo dentro del contenedor
+WORKDIR /app
 
-# Arrancamos Zphisher
+# Copiamos primero el archivo de requisitos
+COPY requirements.txt .
 
-RUN chmod +x zphisher.sh
-ENTRYPOINT ["./zphisher.sh"]
+# Instalamos las dependencias de Python
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copiamos el resto de los archivos del proyecto
+COPY . .
+
+# Exponemos los puertos necesarios (5000 para Flask)
+EXPOSE 5000
+
+# Comando por defecto: ejecutar la aplicación Flask
+CMD ["python", "app.py"]
