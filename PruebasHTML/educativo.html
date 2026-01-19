@@ -3,329 +3,350 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicio de Concienciación - Taller Phishing</title>
+    <title>Aviso de Seguridad Corporativa</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bs-blue: #0d6efd;
+            --bs-indigo: #6610f2;
+            --bs-purple: #6f42c1;
+            --bs-pink: #d63384;
+            --bs-red: #dc3545;
+            --bs-orange: #fd7e14;
+            --bs-yellow: #ffc107;
+            --bs-green: #198754;
+            --bs-teal: #20c997;
+            --bs-cyan: #0dcaf0;
+            --bs-white: #fff;
+            --bs-gray: #6c757d;
+            --bs-gray-dark: #343a40;
+            --bs-primary: #0d6efd;
+            --bs-secondary: #6c757d;
+            --bs-success: #198754;
+            --bs-info: #0dcaf0;
+            --bs-warning: #ffc107;
+            --bs-danger: #dc3545;
+            --bs-light: #f8f9fa;
+            --bs-dark: #212529;
+            --font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f4f4f4;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 40px auto;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            font-family: var(--font-sans-serif);
+            background-color: #f0f2f5;
+            color: #212529;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         .header {
-            background: #d32f2f;
+            background-color: #2c3e50;
             color: white;
-            padding: 30px 40px;
-            border-bottom: 4px solid #b71c1c;
+            padding: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .header h1 {
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 8px;
+        .container {
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 15px;
         }
 
-        .header p {
-            font-size: 16px;
-            opacity: 0.95;
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        .content {
-            padding: 40px;
+        .brand-logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .info-box {
-            background: #fff3e0;
-            border-left: 4px solid #ff9800;
-            padding: 20px;
-            margin-bottom: 30px;
+        .main-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05), 0 10px 15px -3px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
-        .info-box p {
+        .alert-banner {
+            padding: 1.5rem 2rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Colores dinámicos del banner según escenario */
+        .bg-wifi { background-color: #c0392b; }
+        .bg-social { background-color: #8e44ad; }
+        .bg-general { background-color: #2980b9; }
+
+        .alert-title {
             margin: 0;
-            color: #5d4037;
+            font-size: 1.5rem;
+            font-weight: 600;
         }
 
-        .info-box strong {
-            color: #e65100;
+        .alert-subtitle {
+            margin: 0;
+            font-size: 0.95rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .card-body {
+            padding: 2.5rem;
         }
 
         h2 {
-            color: #1976d2;
-            font-size: 22px;
-            margin: 35px 0 20px 0;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e3f2fd;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
-
-        .stat-box {
-            background: #fafafa;
-            padding: 20px;
-            text-align: center;
-            border: 1px solid #e0e0e0;
-        }
-
-        .stat-number {
-            font-size: 36px;
-            font-weight: bold;
-            color: #d32f2f;
-            margin-bottom: 8px;
-        }
-
-        .stat-label {
-            font-size: 13px;
-            color: #666;
-        }
-
-        .signals-list {
-            margin: 20px 0;
-        }
-
-        .signal-item {
-            padding: 20px;
-            margin-bottom: 15px;
-            background: #fafafa;
-            border-left: 3px solid #1976d2;
-        }
-
-        .signal-item h3 {
-            color: #1976d2;
-            font-size: 16px;
-            margin-bottom: 8px;
+            font-size: 1.25rem;
             font-weight: 600;
+            color: #34495e;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #ecf0f1;
         }
 
-        .signal-item p {
+        p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
             color: #555;
-            font-size: 14px;
+        }
+
+        .data-breach-box {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin: 2rem 0;
+        }
+
+        .data-breach-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        .data-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-family: monospace;
+            font-size: 0.95rem;
+        }
+
+        .data-list li {
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px dashed rgba(0,0,0,0.1);
+            padding-bottom: 2px;
+        }
+
+        .data-label { font-weight: 600; }
+
+        .recommendation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .rec-card {
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 1.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .rec-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        .rec-icon {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .rec-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .rec-text {
+            font-size: 0.9rem;
+            color: #6c757d;
             margin: 0;
         }
 
-        .signal-item code {
-            background: #e8eaf6;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-family: 'Courier New', monospace;
-            font-size: 13px;
+        .footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.85rem;
+            color: #95a5a6;
+            border-top: 1px solid #e9ecef;
         }
 
-        .tips-section {
-            background: #e8f5e9;
-            padding: 25px;
-            margin: 30px 0;
-            border-left: 4px solid #4caf50;
-        }
-
-        .tips-section h3 {
-            color: #2e7d32;
-            margin-bottom: 15px;
-            font-size: 18px;
-        }
-
-        .tips-section ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .tips-section li {
-            padding: 8px 0;
-            padding-left: 25px;
-            position: relative;
-            color: #1b5e20;
-        }
-
-        .tips-section li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #4caf50;
-            font-weight: bold;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 15px;
-            margin: 30px 0;
-            flex-wrap: wrap;
-        }
-
-        .btn {
+        .btn-return {
             display: inline-block;
-            padding: 12px 28px;
+            background-color: #34495e;
+            color: white;
+            padding: 10px 24px;
             text-decoration: none;
             border-radius: 4px;
-            font-weight: 500;
-            font-size: 15px;
-            transition: all 0.2s;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            transition: background-color 0.2s;
         }
 
-        .btn-primary {
-            background: #1976d2;
-            color: white;
+        .btn-return:hover {
+            background-color: #2c3e50;
         }
 
-        .btn-primary:hover {
-            background: #1565c0;
-        }
-
-        .btn-secondary {
-            background: #757575;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: #616161;
-        }
-
-        .footer {
-            background: #fafafa;
-            padding: 25px 40px;
-            border-top: 1px solid #e0e0e0;
-            text-align: center;
-            color: #666;
-            font-size: 13px;
-        }
-
-        .footer p {
-            margin: 8px 0;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                margin: 0;
-            }
-            
-            .content {
-                padding: 25px;
-            }
-
-            .header {
-                padding: 20px 25px;
-            }
-
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-            .action-buttons {
-                flex-direction: column;
-            }
-
-            .btn {
-                text-align: center;
-            }
-        }
+        /* Utilities */
+        .text-wifi { color: #c0392b; }
+        .text-social { color: #8e44ad; }
     </style>
 </head>
 <body>
+
+    <header class="header">
+        <div class="container header-content">
+            <div class="brand-logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                DEPARTAMENTO DE SEGURIDAD
+            </div>
+            <div style="font-size: 0.9rem; opacity: 0.8;">Simulacro Educativo #2026-CS</div>
+        </div>
+    </header>
+
     <div class="container">
-        <div class="header">
-            <h1>Ejercicio Completado</h1>
-            <p>Has participado en una simulación de phishing con fines educativos</p>
-        </div>
-
-        <div class="content">
-            <div class="info-box">
-                <p><strong>¿Qué acaba de ocurrir?</strong></p>
-                <p>Acabas de ingresar tus credenciales en una página falsa que simulaba ser Instagram. 
-                En un escenario real, esto significaría que un atacante tendría acceso a tu cuenta. 
-                Este tipo de fraude se conoce como <strong>phishing</strong>, y es uno de los vectores de ataque más utilizados en la actualidad.</p>
-            </div>
-
-            <div class="stats">
-                <div class="stat-box">
-                    <div class="stat-number">90%</div>
-                    <div class="stat-label">de brechas de seguridad comienzan con phishing</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number">3.4B</div>
-                    <div class="stat-label">correos de phishing enviados al día</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number">$17,700</div>
-                    <div class="stat-label">costo promedio por incidente</div>
-                </div>
-            </div>
-
-            <h2>Señales que pudiste identificar</h2>
+        <main class="main-card">
             
-            <div class="signals-list">
-                <div class="signal-item">
-                    <h3>1. Dirección URL incorrecta</h3>
-                    <p>La URL real de Instagram es <code>https://www.instagram.com</code>. Cualquier variación como 
-                    <code>instagram-login.com</code> o <code>instagrarn.com</code> es sospechosa. 
-                    Siempre revisa la barra de direcciones antes de ingresar información sensible.</p>
+            <!-- Dynamic Banner -->
+            <div class="alert-banner {% if scenario == 'wifi' %}bg-wifi{% elif scenario == 'social' %}bg-social{% else %}bg-general{% endif %}">
+                <div class="icon-box">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
                 </div>
-
-                <div class="signal-item">
-                    <h3>2. Certificado de seguridad</h3>
-                    <p>Los sitios legítimos utilizan certificados SSL/TLS válidos. Busca el candado en la barra de direcciones 
-                    y verifica que el certificado pertenezca realmente a la organización que dice ser.</p>
-                </div>
-
-                <div class="signal-item">
-                    <h3>3. Origen del enlace</h3>
-                    <p>Si llegaste aquí desde un correo electrónico, mensaje SMS o red social, eso es una señal de alerta. 
-                    Las plataformas legítimas raramente te pedirán que ingreses credenciales a través de enlaces externos.</p>
-                </div>
-
-                <div class="signal-item">
-                    <h3>4. Sensación de urgencia</h3>
-                    <p>Los atacantes crean escenarios de urgencia artificial: "Tu cuenta será suspendida", "Detectamos actividad sospechosa". 
-                    Las empresas legítimas no presionan a los usuarios de esta manera.</p>
-                </div>
-
-                <div class="signal-item">
-                    <h3>5. Detalles del diseño</h3>
-                    <p>Aunque la página puede parecer idéntica, suele haber pequeñas diferencias: 
-                    errores ortográficos, elementos desalineados, o funcionalidades que no responden correctamente.</p>
+                <div>
+                    <h1 class="alert-title">ACTIVIDAD SOSPECHOSA DETECTADA</h1>
+                    <div class="alert-subtitle">
+                        {% if scenario == 'wifi' %}
+                            Conexión interceptada en red inalámbrica no segura (Evil Twin).
+                        {% elif scenario == 'social' %}
+                            Credenciales comprometidas en sitio de suplantación de identidad.
+                        {% else %}
+                            Navegación en sitio web fraudulento detectada.
+                        {% endif %}
+                    </div>
                 </div>
             </div>
 
-            <div class="tips-section">
-                <h3>Recomendaciones de seguridad</h3>
-                <ul>
-                    <li>Verifica siempre la URL completa antes de ingresar credenciales</li>
-                    <li>Habilita autenticación de dos factores (2FA) en todas tus cuentas</li>
-                    <li>No hagas clic en enlaces de correos o mensajes no solicitados</li>
-                    <li>Utiliza un gestor de contraseñas que detecte automáticamente sitios fraudulentos</li>
-                    <li>Mantén actualizado tu navegador y sistema operativo</li>
-                    <li>Ante la duda, accede manualmente escribiendo la URL en tu navegador</li>
-                    <li>Reporta intentos de phishing a las autoridades competentes</li>
-                </ul>
-            </div>
+            <div class="card-body">
+                
+                <p>Este mensaje aparece porque usted ha participado involuntariamente en un <strong>ejercicio de concienciación sobre ciberseguridad</strong>. Si esto hubiera sido un ataque real, sus credenciales y dispositivos estarían ahora comprometidos.</p>
 
-            <div class="action-buttons">
-                <a href="https://www.instagram.com" class="btn btn-primary">Ir a Instagram oficial</a>
-                <a href="/" class="btn btn-secondary">Volver al taller</a>
-            </div>
-        </div>
+                <div class="data-breach-box">
+                    <div class="data-breach-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11V7a5 5 0 0 1 10 0v4"/><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/></svg>
+                        Datos Exfiltrados Simulados
+                    </div>
+                    <ul class="data-list">
+                        <li><span class="data-label">Usuario/Email:</span> <span>[CAPTURADO]</span></li>
+                        <li><span class="data-label">Contraseña:</span> <span>********</span></li>
+                        <li><span class="data-label">Dirección IP:</span> <span>{{ request.remote_addr }}</span></li>
+                        <li><span class="data-label">User-Agent:</span> <span>{{ request.headers.get('User-Agent')|truncate(40) }}</span></li>
+                        <li><span class="data-label">Timestamp:</span> <span>Ahora mismo</span></li>
+                    </ul>
+                </div>
 
-        <div class="footer">
-            <p><strong>Taller de Concienciación en Seguridad</strong></p>
-            <p>Este ejercicio tiene propósitos exclusivamente educativos. Ningún dato fue comprometido.</p>
-            <p>La mejor defensa contra el phishing es el conocimiento y la precaución.</p>
-        </div>
+                <h2>Análisis del Incidente</h2>
+                
+                {% if scenario == 'wifi' %}
+                    <p>El vector de ataque empleado fue un <strong>Portal Cautivo Falso (Evil Twin)</strong>. El atacante duplicó el nombre (SSID) de una red confiable (como la de un restaurante) para interceptar todo el tráfico de las víctimas.</p>
+                    <p><strong>Consecuencias potenciales:</strong> Robo de credenciales bancarias, interceptación de correos electrónicos, instalación de malware en el dispositivo móvil.</p>
+                {% elif scenario == 'social' %}
+                    <p>El vector de ataque empleado fue <strong>Suplantación de Identidad (Phishing)</strong>. Se replicó la interfaz gráfica de una red social conocida para generar confianza y solicitar credenciales legítimas.</p>
+                    <p><strong>Consecuencias potenciales:</strong> Pérdida total de la cuenta, uso de la identidad para estafas a terceros, acceso lateral a otros servicios con la misma contraseña.</p>
+                {% else %}
+                    <p>El usuario accedió a un dominio no verificado que simulaba ser un servicio legítimo. La falta de verificación de la URL permitió la ejecución del código de captura.</p>
+                {% endif %}
+
+                <h2>Protocolos de Prevención Recomendados</h2>
+                
+                <div class="recommendation-grid">
+                    {% if scenario == 'wifi' %}
+                         <div class="rec-card">
+                            <span class="rec-icon text-wifi">🔒</span>
+                            <span class="rec-title">Uso de VPN</span>
+                            <p class="rec-text">El uso de Redes Privadas Virtuales (VPN) es obligatorio en redes públicas para cifrar el tráfico de extremo a extremo.</p>
+                        </div>
+                        <div class="rec-card">
+                            <span class="rec-icon text-wifi">📶</span>
+                            <span class="rec-title">Verificación de Red</span>
+                            <p class="rec-text">Desactive la conexión automática a redes Wi-Fi. Verifique siempre con el personal del establecimiento el nombre exacto de la red.</p>
+                        </div>
+                    {% else %}
+                        <div class="rec-card">
+                            <span class="rec-icon text-social">🔗</span>
+                            <span class="rec-title">Validación de URL</span>
+                            <p class="rec-text">Antes de introducir credenciales, verifique que el dominio sea exactamente el oficial (ej: instagram.com vs instagram-login.net).</p>
+                        </div>
+                         <div class="rec-card">
+                            <span class="rec-icon text-social">📱</span>
+                            <span class="rec-title">Doble Factor (2FA)</span>
+                            <p class="rec-text">Active la autenticación de doble factor. Incluso si roban su contraseña, no podrán acceder sin el segundo código.</p>
+                        </div>
+                    {% endif %}
+
+                     <div class="rec-card">
+                        <span class="rec-icon">🛡️</span>
+                        <span class="rec-title">Gestión de Contraseñas</span>
+                        <p class="rec-text">Utilice un gestor de contraseñas. Estos programas no autocompletarán los datos si detectan que el sitio web es falso.</p>
+                    </div>
+                </div>
+
+                <div style="text-align: center;">
+                    <a href="javascript:history.back()" class="btn-return">Volver al inicio</a>
+                </div>
+
+            </div>
+        </main>
     </div>
+
+    <footer class="footer">
+        <p>© 2026 Taller de Ciberseguridad - Material Formativo Exclusivo.</p>
+    </footer>
 </body>
 </html>

