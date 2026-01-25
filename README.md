@@ -1,284 +1,267 @@
-﻿# 🎣 Taller_Phishing
+﻿# 🎯 Taller de Phishing - Aprende a Detectar Ataques
 
-Bienvenidos al taller de Phishing en donde podrás sustraer cuentas de manera educativa. 😈
+Bienvenido al taller donde aprenderás a identificar intentos de phishing. En 2 horas vas a ver cómo funcionan estos ataques y, más importante, cómo protegerte de ellos.
 
-Este proyecto utiliza Docker para ejecutar una herramienta de simulación de phishing en un entorno seguro y aislado.
-
-**Objetivo:** Demostrar la facilidad con la que se pueden clonar webs para aprender a identificar estos fraudes.
-
-**Prohibido:** Utilizar esta herramienta contra objetivos reales o personas sin su consentimiento.
-
-**Responsabilidad:** El usuario es el único responsable de sus acciones.
+> **Nota importante:** Esto es solo educativo. Todo lo que ves aquí son simulaciones controladas.
 
 ---
 
-## 📊 ¿Qué incluye este taller?
+## ¿Qué vamos a hacer?
 
-- 🔵 **Instagram Clone**: Página de login idéntica a Instagram
-- 📶 **WiFi Portal**: Portal cautivo falso (Evil Twin)
-- 📈 **Dashboard en Tiempo Real**: Ve las capturas mientras ocurren
-- 🎓 **Página Educativa**: Enseña a identificar señales de phishing
-- 💾 **Base de Datos**: Guarda todos los datos capturados
-- 📊 **Exportación CSV**: Descarga los resultados para análisis
+Durante el taller vas a:
+
+- Ver demos en vivo de ataques de phishing (Instagram, WiFi falsos, emails fraudulentos)
+- Jugar a "Spot the Phish" - un juego interactivo con 12 escenarios reales
+- Aprender las señales de alarma que debes detectar
+- Llevarte un kit completo de recursos para consultar después
+
+Al final del taller sabrás identificar la mayoría de intentos de phishing que te encuentres.
 
 ---
 
-## 🚀 Guía Paso a Paso
+## 🚨 Señales de Alarma Básicas
 
-Abre tu terminal dentro de esta carpeta (`Taller_Pishing`) y sigue las instrucciones.
+Aprende a detectar estas red flags:
 
-### 1️⃣ Construir el contenedor
+**En emails:**
+- Te amenazan con urgencia ("su cuenta se bloqueará en 24h")
+- El dominio del remitente no cuadra (bbva-notificaciones.com en vez de bbva.es)
+- Errores gramaticales raros
+- Te piden contraseñas o datos personales
 
-Lo primero es "fabricar" nuestro contenedor. Este comando leerá el archivo Dockerfile, descargará las dependencias de internet y preparará todo el sistema automáticamente.
+**En URLs:**
+- Dominios muy parecidos pero con pequeños cambios (paypa1.com, arnazon.com)
+- URL que no coincide con el remitente
+- Sin HTTPS (el candado)
 
-Ejecuta este comando (¡no olvides el punto al final!):
+**En mensajes:**
+- Premios que nunca pediste
+- Paquetes que no esperabas
+- Urgencia extrema
+
+---
+
+## 🎮 Actividades del Taller
+
+### 1. Demo en Vivo (20 min)
+Verás cómo funcionan diferentes ataques desde dentro. Es impactante ver lo fácil que es crear una página falsa convincente.
+
+### 2. Juego "Spot the Phish" (25 min)
+12 escenarios para poner a prueba tu ojo. Cada respuesta incluye explicación de por qué es phishing o legítimo.
+
+**URL del juego:** (el instructor te la dará)
+
+### 3. Actividad Grupal (20 min)
+Trabajarás con compañeros para entender la mentalidad del atacante.
+
+### 4. Quiz Final (15 min)
+Kahoot para cerrar y consolidar lo aprendido.
+
+---
+
+## 🛡️ Cómo Protegerte
+
+### Lo básico:
+
+1. **Verifica siempre antes de hacer clic**
+   - Lee el dominio letra por letra
+   - Pasa el ratón sobre los enlaces (sin hacer clic) para ver la URL real
+   - Cuando tengas dudas, accede escribiendo la URL oficial tú mismo
+
+2. **Usa un gestor de contraseñas**
+   
+   Esto es clave: servicios como Bitwarden (gratis) o 1Password generan contraseñas únicas para cada sitio. Y aquí viene lo mejor: **no autocompletan en sitios falsos** porque detectan que el dominio no es el correcto. Es como tener un anti-phishing automático.
+
+3. **Activa 2FA (autenticación en dos pasos)**
+   
+   Incluso si roban tu contraseña, no podrán entrar sin el segundo código.
+
+4. **Ante la duda, NO hagas clic**
+   
+   En serio. Mejor perder 2 minutos llamando al banco para verificar, que perder tu cuenta.
+
+### Si ya caíste en phishing:
+
+Actúa rápido:
+1. Cambia la contraseña YA (en el sitio real, no en el enlace del phishing)
+2. Activa 2FA si no lo tenías
+3. Revisa actividad reciente
+4. Si diste datos bancarios, llama a tu banco inmediatamente
+
+---
+
+## 💡 Herramientas Útiles
+
+**Gestores de contraseñas:**
+- Bitwarden (gratis, open source)
+- 1Password (de pago pero muy completo)
+- LastPass (tiene versión gratis)
+
+**Para verificar URLs sospechosas:**
+- VirusTotal (https://www.virustotal.com/)
+- URLScan.io
+- Have I Been Pwned (para ver si tu email fue filtrado)
+
+**Apps para 2FA:**
+- Google Authenticator
+- Microsoft Authenticator
+- Authy
+
+---
+
+## 📚 Recursos del Taller
+
+Al final del taller tendrás acceso a:
+
+- **Checklist de verificación** - Guía paso a paso para analizar emails y mensajes
+- **Guía rápida** - Las 5 señales de alarma más importantes
+- **Lista de herramientas** - Software recomendado con enlaces
+- **Certificado** - Para que tengas constancia de tu participación
+
+**URL del kit de recursos:** (el instructor te la dará durante el taller)
+
+---
+
+## ❓ Preguntas Frecuentes
+
+**P: ¿Por qué caí en el phishing del taller?**  
+R: Es normal. Los ataques están diseñados para engañar. Lo importante es que ahora sabes identificarlos.
+
+**P: ¿Están seguros mis datos después del taller?**  
+R: Sí, todo fue simulado. Los datos se borran al finalizar y nadie tiene acceso.
+
+**P: ¿Debo cambiar mis contraseñas reales?**  
+R: Solo si usaste contraseñas reales en el taller (cosa que NO deberías hacer). Si usaste contraseñas de prueba, estás bien.
+
+**P: ¿Cómo sé si un email de mi banco es real?**  
+R: Tres cosas - verifica el dominio del remitente, los bancos NUNCA piden contraseñas por email, y si dudas llama al número que está en tu tarjeta.
+
+---
+
+## 📞 Contactos Importantes
+
+**España:**
+- INCIBE (Instituto Nacional de Ciberseguridad): 017
+- Reportar phishing: https://www.incibe.es/
+
+**Tu banco:** Número en tu tarjeta (NO el del email sospechoso)
+
+---
+
+## 🎓 Certificado
+
+Si completas el taller y superas el quiz final, puedes generar tu certificado digital.
+
+---
+
+## � Comentario Final
+
+La ciberseguridad no es solo cosa de expertos. Con conocer unas pocas señales de alarma ya reduces muchísimo el riesgo. Comparte lo que aprendas con familia y amigos - muchos ataques funcionan porque la gente simplemente no sabe qué buscar.
+
+Recuerda: **ante la duda, NO hagas clic**.
+
+---
+
+## 🔧 Para el Instructor - Setup del Taller
+
+<details>
+<summary>Click para ver instrucciones de instalación</summary>
+
+### Requisitos previos:
+- Docker instalado en tu máquina
+- Tener este repositorio clonado
+
+### Paso 1: Construir la imagen Docker
+
+Abre una terminal en la carpeta del proyecto y ejecuta:
 
 ```bash
 docker build -t taller-phishing .
 ```
 
-💡 *En caso de que te salga error de permisos en Linux escribe `sudo` delante*
+Esto tardará 2-3 minutos la primera vez (descarga dependencias).
 
-⏱️ *Primera vez: ~2-3 minutos*
-
----
-
-### 2️⃣ El arranque
+### Paso 2: Iniciar el contenedor
 
 ```bash
-docker run -it --rm -p 5000:5000 taller-phishing
+docker run -d -p 5000:5000 --name taller-phishing-test taller-phishing
 ```
 
-🎉 **¡Listo!** El servidor está corriendo.
+El servidor estará corriendo en `http://localhost:5000`
 
----
+### Paso 3: Verificar que funciona
 
-### 3️⃣ Acceder a las páginas (La Víctima)
+Abre tu navegador y prueba:
+- Instagram: http://localhost:5000/
+- WiFi Portal: http://localhost:5000/wifi
+- Juego: http://localhost:5000/juego
+- Kit recursos: http://localhost:5000/kit
+- Dashboard: http://localhost:5000/admin
 
-Ahora que el servidor está corriendo, abre tu navegador web y visita:
+### Comandos útiles:
 
-#### 📱 Opción A: Probar en tu ordenador (Localhost)
-
-- **Instagram Clone**: http://localhost:5000
-- **WiFi Portal**: http://localhost:5000/wifi
-- **Dashboard Admin**: http://localhost:5000/admin
-- **Demo Correo Phishing**: http://localhost:5000/email-demo 📧
-
-#### 🌐 Opción B: Compartir en clase (Red Local)
-
-Si quieres que tus compañeros accedan desde sus dispositivos:
-
-**Windows:**
-```powershell
-# 1. Obtén tu IP
-ipconfig
-# Busca "Dirección IPv4" (ej: 192.168.1.100)
-
-# 2. Abre el firewall (ejecutar como administrador)
-New-NetFirewallRule -DisplayName "Taller Phishing" -Direction Inbound -LocalPort 5000 -Protocol TCP -Action Allow
-
-# 3. Comparte esta URL con tus compañeros
-http://TU_IP:5000  # Ej: http://192.168.1.100:5000
-```
-
-**Linux/Mac:**
+**Ver logs del contenedor:**
 ```bash
-# Obtén tu IP
-ip addr show
-# o
-ifconfig
-
-# Comparte esta URL
-http://TU_IP:5000
+docker logs taller-phishing-test
 ```
 
-⚠️ **Nota:** Todos deben estar en la misma red WiFi.
-
-#### 🚀 Opción C: Túnel Público (Cloudflared) - ¡URL Realista!
-
-Para obtener una URL pública accesible desde **cualquier lugar** con HTTPS (perfecto para presentaciones):
-
-```powershell
-# Ejecutar script automatizado
-.\scripts\iniciar_tunel_publico.ps1
-```
-
-Este script generará una URL como:
-```
-https://palabras-aleatorias-aqui.trycloudflare.com
-```
-
-✅ **Ventajas:**
-- Accesible desde cualquier dispositivo con internet
-- HTTPS automático (más realista)
-- No necesitas estar en la misma red WiFi
-
-⚠️ **Importante:** La URL es temporal y cambia cada vez.
-
----
-
-### 4️⃣ Monitorear las capturas (El Atacante)
-
-#### En la Terminal
-Todos los datos capturados aparecerán en tiempo real en la terminal donde ejecutaste el contenedor.
-
-#### En el Dashboard Web 📊
-
-Abre el dashboard administrativo para ver estadísticas profesionales:
-
-```
-http://localhost:5000/admin
-```
-
-**¿Qué verás?**
-- 📈 Estadísticas: Visitantes, víctimas, tasa de conversión
-- 📉 Gráfico timeline: Capturas por hora (últimas 24h)
-- 🌍 Top IPs: Ranking de dispositivos más activos
-- 📋 Tabla completa: Todas las credenciales capturadas
-- 💾 Exportar CSV: Descarga los datos
-- � Ver ejemplo de correo phishing: Muestra cómo se vería un email real
-- 🔄 Auto-refresh: Se actualiza solo cada 10 segundos
-
-💡 **Tip:** Abre el dashboard en una segunda pantalla durante tu presentación.
-
-#### 📧 Demo de Correo Phishing
-
-Para mostrar a tus compañeros cómo se ve un correo de phishing real:
-
-1. **Desde el dashboard**, haz clic en "📧 Ver Ejemplo de Correo Phishing"
-2. O accede directamente a: `http://localhost:5000/email-demo`
-
-**Características de la demo:**
-- ✅ Muestra un correo de Instagram falso completo
-- ✅ Resalta las señales de alerta que se deben notar
-- ✅ Explica las técnicas de ingeniería social usadas
-- ✅ El botón muestra la URL real al pasar el mouse
-- ✅ Perfecto para proyectar en clase y analizar en grupo
-
-🎓 **Uso en clase:** Proyecta esta página y pide a tus compañeros que identifiquen las señales de phishing antes de revelar las respuestas.
-
----
-
-### 5️⃣ La Experiencia Educativa 🎓
-
-Cuando alguien ingrese sus credenciales en cualquier página falsa, será redirigido automáticamente a una **página educativa** que explica:
-
-- 🚨 Las 5 señales de phishing que debió notar
-- 📊 Estadísticas reales de phishing
-- 💡 Consejos de protección
-- 🔐 Mejores prácticas de seguridad
-
-¡Así aprenden en el acto!
-
----
-
-## 🛑 Cómo salir
-
-Cuando termines la práctica:
-
-1. Pulsa `CTRL + C` en la terminal (dos veces si es necesario)
-2. El contenedor se borrará automáticamente gracias a la opción `--rm`, dejando tu ordenador limpio
-
----
-
-## 📁 Estructura del Proyecto
-
-```
-Taller_Pishing/
-├── app.py                    # Servidor Flask principal
-├── Dockerfile               # Configuración Docker
-├── requirements.txt         # Dependencias Python
-├── PruebasHTML/             # Páginas HTML de phishing
-│   ├── indexinsta.html      # Instagram clone
-│   ├── wifi_portal.html     # WiFi portal
-│   ├── educativo.html       # Página educativa
-│   └── dashboard.html       # Dashboard admin
-├── scripts/                 # Scripts de utilidad
-│   ├── compartir_red_local.ps1
-│   └── iniciar_tunel_publico.ps1
-└── docs/                    # Documentación completa
-    ├── README.md
-    ├── IDEAS.md
-    └── URL_PUBLICA.md
-```
-
----
-
-## 🔐 ¿Qué datos se capturan?
-
-El servidor guarda automáticamente:
-
-- ✅ Timestamp (fecha y hora)
-- ✅ Direcciones IP de visitantes
-- ✅ User-Agent (navegador/dispositivo)
-- ✅ Credenciales ingresadas (usuario y contraseña)
-- ✅ Escenario utilizado (Instagram, WiFi, etc.)
-
-### Acceder a la base de datos
-
+**Detener el contenedor:**
 ```bash
-sqlite3 phishing_data.db
-
-# Consultas útiles
-SELECT * FROM captures;
-SELECT COUNT(*) FROM visits;
-SELECT scenario, COUNT(*) FROM captures GROUP BY scenario;
+docker stop taller-phishing-test
 ```
 
-### API REST para desarrolladores
-
-| Endpoint | Descripción |
-|----------|-------------|
-| `/api/stats` | Estadísticas generales |
-| `/api/captures` | Últimas 100 capturas |
-| `/api/timeline` | Timeline 24h |
-| `/api/export/csv` | Exportar CSV |
-
+**Eliminar el contenedor:**
 ```bash
-# Ejemplo
-curl http://localhost:5000/api/stats
-curl http://localhost:5000/api/export/csv -o capturas.csv
+docker rm taller-phishing-test
 ```
 
----
+**Reconstruir después de cambios:**
+```bash
+docker stop taller-phishing-test
+docker rm taller-phishing-test
+docker build -t taller-phishing .
+docker run -d -p 5000:5000 --name taller-phishing-test taller-phishing
+```
 
-## 📚 Recursos Adicionales
+### Para compartir en red local:
 
-- 📖 [Documentación Completa](docs/README.md) - Información detallada sobre phishing
-- 💡 [Ideas y Roadmap](docs/IDEAS.md) - Mejoras futuras
-- 🤝 [CONTRIBUTING.md](CONTRIBUTING.md) - Cómo contribuir
-- 📄 [LICENSE](LICENSE) - Licencia MIT
+1. Obtén tu IP local:
+   - Windows: `ipconfig` (busca IPv4)
+   - Mac/Linux: `ifconfig` o `ip addr`
 
-**Aprende más sobre ciberseguridad:**
-- [INCIBE - Ciberseguridad](https://www.incibe.es/)
-- [PhishTank - Base de datos](https://phishtank.org/)
+2. Comparte con los participantes:
+   ```
+   http://TU_IP:5000/juego
+   http://TU_IP:5000/kit
+   ```
 
----
+3. Asegúrate de que el firewall permite conexiones al puerto 5000
 
-## ⚠️ Responsabilidad Legal
+### Estructura de URLs para el taller:
 
-**ESTE PROYECTO ES EXCLUSIVAMENTE EDUCATIVO**
+- `/` - Instagram phishing demo
+- `/wifi` - WiFi portal falso
+- `/juego` - Spot the Phish (actividad principal)
+- `/kit` - Kit de supervivencia con recursos
+- `/recursos/checklist` - Checklist detallado
+- `/recursos/guia-rapida` - Guía rápida
+- `/recursos/herramientas` - Lista de herramientas
+- `/certificado` - Generador de certificados
+- `/admin` - Dashboard de estadísticas
+- `/educativo` - Página educativa (redirect automático)
 
-✅ **Permitido:**
-- Educación en ciberseguridad
-- Demostraciones en clase
-- Entrenamiento de concienciación
-- Investigación en entornos controlados
+### Notas:
 
-❌ **PROHIBIDO:**
-- Uso contra personas sin consentimiento
-- Ataques a sistemas reales
-- Cualquier actividad ilegal
-- Distribución de datos capturados
+- La base de datos SQLite se crea automáticamente en `phishing_data.db`
+- Los datos se resetean cada vez que eliminas el contenedor
+- El servidor corre en modo `debug=False` para producción
 
-**El usuario es 100% responsable de sus acciones. El uso indebido puede resultar en consecuencias legales graves.**
+</details>
 
 ---
 
 <div align="center">
 
-**Hecho con ❤️ para la educación en ciberseguridad**
-
-[⬆ Volver arriba](#-taller_phishing)
+**Mantente alerta, mantente seguro** 🛡️
 
 </div>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kit Anti-Phishing - Recursos del Taller</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            margin-bottom: 2.5rem;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .intro {
+            background: white;
+            border-left: 4px solid #2563eb;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .intro h2 {
+            font-size: 1.3rem;
+            color: #2563eb;
+            margin-bottom: 0.8rem;
+        }
+
+        .intro p {
+            color: #444;
+            line-height: 1.7;
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .resource-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.8rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+            transition: transform 0.15s, box-shadow 0.15s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            border: 1px solid #e5e7eb;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .resource-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .resource-card h3 {
+            color: #1a1a1a;
+            margin-bottom: 0.6rem;
+            font-size: 1.2rem;
+        }
+
+        .resource-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+        }
+
+        .resource-meta {
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .footer {
+            background: #2563eb;
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .footer h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer p {
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .note {
+            background: #fef3c7;
+            border: 1px solid #fbbf24;
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 2rem 0;
+            color: #92400e;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .resources {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛡️ Kit Anti-Phishing</h1>
+            <p>Recursos del taller que puedes consultar cuando quieras</p>
+        </div>
+
+        <div class="intro">
+            <h2>Para qué sirve esto</h2>
+            <p>Aquí tienes todo lo que vimos en el taller más algunos recursos extra. Guarda estos enlaces en favoritos
+                o anótalos - te van a ser útiles cuando recibas algo sospechoso y no sepas si es legítimo o no.</p>
+        </div>
+
+        <div class="resources">
+            <a href="/recursos/checklist" class="resource-card">
+                <div class="resource-icon">📋</div>
+                <h3>Checklist Completo</h3>
+                <p>Guía paso a paso para cuando necesites verificar un email, mensaje o URL. Incluye qué hacer si ya
+                    caíste en phishing.</p>
+                <div class="resource-meta">Emails · URLs · WhatsApp · Emergencias</div>
+            </a>
+
+            <a href="/recursos/guia-rapida" class="resource-card">
+                <div class="resource-icon">⚡</div>
+                <h3>Guía Rápida</h3>
+                <p>Las 5 señales de alarma más importantes resumidas. Para cuando tengas prisa y solo quieras verificar
+                    lo básico.</p>
+                <div class="resource-meta">Red flags · Regla 3s · Contactos útiles</div>
+            </a>
+
+            <a href="/recursos/herramientas" class="resource-card">
+                <div class="resource-icon">🔧</div>
+                <h3>Herramientas</h3>
+                <p>Software recomendado: gestores de contraseñas, verificadores de URLs, apps de 2FA. Con enlaces
+                    directos para descargar.</p>
+                <div class="resource-meta">Bitwarden · VirusTotal · Authenticator</div>
+            </a>
+
+            <a href="/certificado" class="resource-card">
+                <div class="resource-icon">🎓</div>
+                <h3>Tu Certificado</h3>
+                <p>Genera tu certificado personalizado del taller. Puedes guardarlo o compartirlo.</p>
+                <div class="resource-meta">Personalizable · Descargable</div>
+            </a>
+        </div>
+
+        <div class="note">
+            <strong>💡 Consejo:</strong> Guarda la URL de este kit en favoritos. La próxima vez que recibas algo
+            sospechoso, puedes volver aquí para consultar la checklist.
+        </div>
+
+        <div class="footer">
+            <h3>Recuerda la regla de oro</h3>
+            <p>Ante la duda, NO hagas clic. Siempre es mejor verificar.</p>
+            <p style="font-size: 0.9rem; opacity: 0.8;">Taller de Phishing 2026</p>
+        </div>
+    </div>
+</body>
+
+</html>

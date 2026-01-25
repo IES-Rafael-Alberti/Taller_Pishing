@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spot the Phish - Juego de Detección</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f5f5;
+            color: #1a1a1a;
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: #2563eb;
+            color: white;
+            padding: 1.25rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .score-display {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .main-content {
+            padding: 2.5rem 0 4rem;
+        }
+
+        /* Welcome Screen */
+        .welcome-screen {
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .welcome-screen h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+
+        .welcome-screen p {
+            font-size: 1.15rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .instruction-box {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+        }
+
+        .instruction-box h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1.25rem;
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        .instruction-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .instruction-box li {
+            padding: 0.65rem 0;
+            padding-left: 1.75rem;
+            position: relative;
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .instruction-box li::before {
+            content: "•";
+            position: absolute;
+            left: 0.5rem;
+            color: #2563eb;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 0.9rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+            box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Game Screen */
+        .game-screen {
+            display: none;
+        }
+
+        .progress-bar {
+            background: #e5e7eb;
+            height: 8px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .progress-fill {
+            background: #2563eb;
+            height: 100%;
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        .question-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .question-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 2px solid #f3f4f6;
+        }
+
+        .question-icon {
+            font-size: 2rem;
+            line-height: 1;
+        }
+
+        .question-type {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #2563eb;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.25rem;
+        }
+
+        .question-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .scenario-box {
+            background: #fafafa;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            position: relative;
+        }
+
+        .scenario-label {
+            position: absolute;
+            top: -10px;
+            left: 1rem;
+            background: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #6b7280;
+            border: 1px solid #d1d5db;
+        }
+
+        .email-header {
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .email-field {
+            margin: 0.5rem 0;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .email-field strong {
+            color: #374151;
+            min-width: 80px;
+        }
+
+        .url-display {
+            background: #f9fafb;
+            padding: 1rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            word-break: break-all;
+            border: 1px solid #d1d5db;
+            color: #1d4ed8;
+            font-weight: 500;
+        }
+
+        .message-bubble {
+            background: #eff6ff;
+            padding: 1.25rem;
+            border-radius: 12px 12px 12px 4px;
+            margin: 1rem 0;
+            border: 1px solid #bfdbfe;
+            color: #1e40af;
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .choice-btn {
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border: 2px solid;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-real {
+            background: #f0fdf4;
+            border-color: #16a34a;
+            color: #15803d;
+        }
+
+        .btn-real:hover {
+            background: #16a34a;
+            color: white;
+            border-color: #16a34a;
+        }
+
+        .btn-phishing {
+            background: #fef2f2;
+            border-color: #dc2626;
+            color: #b91c1c;
+        }
+
+        .btn-phishing:hover {
+            background: #dc2626;
+            color: white;
+            border-color: #dc2626;
+        }
+
+        .choice-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Feedback */
+        .feedback {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 3px solid;
+            display: none;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feedback.correct {
+            background: #f0fdf4;
+            border-color: #16a34a;
+        }
+
+        .feedback.incorrect {
+            background: #fef2f2;
+            border-color: #dc2626;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .feedback-icon {
+            font-size: 1.75rem;
+        }
+
+        .feedback-text {
+            line-height: 1.6;
+            color: #374151;
+            margin-bottom: 1rem;
+        }
+
+        .red-flags {
+            background: #fafafa;
+            border: 1px solid #d1d5db;
+            border-left: 3px solid #2563eb;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .red-flags h4 {
+            color: #1a1a1a;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .red-flags ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .red-flags li {
+            padding: 0.4rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #4b5563;
+            font-size: 0.9rem;
+        }
+
+        .red-flags li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #2563eb;
+            font-weight: 700;
+        }
+
+        .next-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 0.85rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.2s;
+        }
+
+        .next-btn:hover {
+            background: #1d4ed8;
+        }
+
+        /* Results Screen */
+        .results-screen {
+            display: none;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .results-screen h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1a1a1a;
+        }
+
+        .final-score {
+            font-size: 4.5rem;
+            font-weight: 800;
+            color: #2563eb;
+            margin: 1.5rem 0;
+        }
+
+        .score-message {
+            font-size: 1.25rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .summary-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: left;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .summary-label {
+            color: #666;
+            font-weight: 600;
+        }
+
+        .summary-value {
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .restart-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 0.9rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 1rem;
+        }
+
+        .restart-btn:hover {
+            background: #1d4ed8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+
+            .welcome-screen h1,
+            .results-screen h1 {
+                font-size: 2rem;
+            }
+
+            .final-score {
+                font-size: 4rem;
+            }
+
+            .question-card {
+                padding: 1.5rem;
+            }
+
+            .action-buttons {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .logo {
+                font-size: 1.25rem;
+            }
+
+            .score-display {
+                font-size: 0.9rem;
+                padding: 0.5rem 1rem;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                🎯 Spot the Phish
+            </div>
+            <div class="score-display" id="scoreDisplay">
+                Puntuación: <span id="currentScore">0</span> / <span id="totalQuestions">12</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content container">
+        <!-- Welcome Screen -->
+        <div class="welcome-screen" id="welcomeScreen">
+            <h1>🕵️ Spot the Phish</h1>
+            <p>Pon a prueba tu habilidad para detectar intentos de phishing. ¿Puedes distinguir lo real de lo falso?</p>
+
+            <div class="instruction-box">
+                <h3>📋 Instrucciones</h3>
+                <ul>
+                    <li>Se te mostrarán 12 escenarios diferentes: emails, URLs, mensajes y publicaciones en redes
+                        sociales</li>
+                    <li>Para cada uno, decide si es LEGÍTIMO o PHISHING</li>
+                    <li>Recibirás feedback inmediato con explicaciones detalladas</li>
+                    <li>Aprende a identificar las señales de alarma en cada caso</li>
+                    <li>Al final verás tu puntuación y un resumen de tu desempeño</li>
+                </ul>
+            </div>
+
+            <button class="btn" onclick="startGame()">🚀 Comenzar el Juego</button>
+        </div>
+
+        <!-- Game Screen -->
+        <div class="game-screen" id="gameScreen">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div class="question-card" id="questionCard">
+                <!-- Dynamic content will be inserted here -->
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div class="results-screen" id="resultsScreen">
+            <h1>🎉 ¡Juego Completado!</h1>
+            <div class="final-score" id="finalScore">0/12</div>
+            <div class="score-message" id="scoreMessage"></div>
+
+            <div class="summary-card">
+                <div class="summary-item">
+                    <span class="summary-label">✅ Respuestas Correctas</span>
+                    <span class="summary-value" style="color: #16a34a;" id="correctCount">0</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">❌ Respuestas Incorrectas</span>
+                    <span class="summary-value" style="color: #dc2626;" id="incorrectCount">0</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">📊 Porcentaje de Acierto</span>
+                    <span class="summary-value" id="percentageScore">0%</span>
+                </div>
+            </div>
+
+            <button class="restart-btn" onclick="restartGame()">🔄 Jugar de Nuevo</button>
+        </div>
+    </main>
+
+    <script>
+        // Game data
+        const scenarios = [
+            {
+                type: "Email",
+                icon: "📧",
+                title: "Notificación Bancaria",
+                content: `
+                    <div class="email-header">
+                        <div class="email-field">
+                            <strong>De:</strong>
+                            <span>seguridad@bbva-notificaciones.com</span>
+                        </div>
+                        <div class="email-field">
+                            <strong>Asunto:</strong>
+                            <span>⚠️ Acción Requerida: Su cuenta ha sido bloqueada</span>
+                        </div>
+                    </div>
+                    <p><strong>Estimado cliente,</strong></p>
+                    <p>Hemos detectado actividad sospechosa en su cuenta. Por motivos de seguridad, hemos procedido a bloquear temporalmente su acceso.</p>
+                    <p><strong>Para desbloquear su cuenta, debe verificar su identidad haciendo clic aquí dentro de las próximas 24 horas.</strong></p>
+                    <p>Si no realiza esta acción, su cuenta será cerrada permanentemente.</p>
+                `,
+                answer: "phishing",
+                explanation: "Este es un claro ejemplo de phishing bancario.",
+                redFlags: [
+                    "El dominio 'bbva-notificaciones.com' NO es oficial (el real es bbva.es)",
+                    "Urgencia artificial: 'dentro de las próximas 24 horas'",
+                    "Amenaza de cierre permanente para generar pánico",
+                    "Los bancos nunca piden verificar identidad por email",
+                    "Falta de personalización (no usa tu nombre real)"
+                ]
+            },
+            {
+                type: "URL",
+                icon: "🔗",
+                title: "Verificación de Dominio",
+                content: `
+                    <p>Has recibido un mensaje con este enlace para acceder a tu cuenta de PayPal:</p>
+                    <div class="url-display">
+                        https://www.paypa1.com/signin
+                    </div>
+                `,
+                answer: "phishing",
+                explanation: "Este dominio es fraudulento y utiliza una técnica llamada 'typosquatting'.",
+                redFlags: [
+                    "Usa el número '1' en lugar de la letra 'l': 'paypa1.com' vs 'paypal.com'",
+                    "Los atacantes registran dominios muy similares al original",
+                    "Siempre verifica letra por letra los dominios antes de iniciar sesión",
+                    "El dominio real de PayPal es 'paypal.com' (con doble 'l')"
+                ]
+            },
+            {
+                type: "WhatsApp",
+                icon: "💬",
+                title: "Mensaje de Paquetería",
+                content: `
+                    <div class="message-bubble">
+                        📦 <strong>DHL Express</strong><br><br>
+                        Su paquete con código #DHL-94857 está retenido en nuestra oficina de reparto.<br><br>
+                        Motivo: Falta de pago de tasas aduaneras (4.99€)<br><br>
+                        Para recibir su envío hoy, pague aquí:<br>
+                        🔗 dhl-es-entregas.com/pago<br><br>
+                        Sin pago, el paquete será devuelto al remitente en 48h.
+                    </div>
+                `,
+                answer: "phishing",
+                explanation: "Este es un clásico phishing de paquetería, muy común actualmente.",
+                redFlags: [
+                    "DHL nunca cobra tasas aduaneras por WhatsApp",
+                    "El dominio 'dhl-es-entregas.com' NO es oficial (el real es dhl.es)",
+                    "Cantidad pequeña (4.99€) para que pagues sin pensarlo",
+                    "Urgencia: 'recibir su envío hoy' o 'será devuelto'",
+                    "No has pedido ningún paquete recientemente"
+                ]
+            },
+            {
+                type: "Email",
+                icon: "📧",
+                title: "Notificación de LinkedIn",
+                content: `
+                    <div class="email-header">
+                        <div class="email-field">
+                            <strong>De:</strong>
+                            <span>notifications@linkedin.com</span>
+                        </div>
+                        <div class="email-field">
+                            <strong>Asunto:</strong>
+                            <span>María García te ha enviado una solicitud de conexión</span>
+                        </div>
+                    </div>
+                    <p>Hola,</p>
+                    <p>María García quiere conectar contigo en LinkedIn.</p>
+                    <p><strong>María García</strong><br>
+                    Directora de Recursos Humanos en TechCorp</p>
+                    <p><button style="background:#0a66c2;color:white;padding:10px 20px;border:none;border-radius:4px;">Aceptar</button> <button style="background:white;color:#0a66c2;padding:10px 20px;border:1px solid #0a66c2;border-radius:4px;">Ignorar</button></p>
+                    <p style="font-size:0.85em;color:#666;">Este email se envió a tu cuenta de LinkedIn. <a href="#">Cancelar suscripción</a> | <a href="#">Centro de ayuda</a></p>
+                `,
+                answer: "real",
+                explanation: "Este es un email legítimo de LinkedIn.",
+                redFlags: [
+                    "✅ Dominio auténtico: 'linkedin.com' (no variaciones)",
+                    "✅ Formato profesional y coherente con los emails reales de LinkedIn",
+                    "✅ Incluye opciones de cancelar suscripción (requisito legal)",
+                    "✅ No pide información personal ni contraseñas",
+                    "✅ Los botones llevan a acciones habituales de la plataforma"
+                ]
+            },
+            {
+                type: "URL",
+                icon: "🔗",
+                title: "Inicio de Sesión Netflix",
+                content: `
+                    <p>Recibes un correo diciendo que tu suscripción de Netflix ha expirado y necesitas actualizar tu método de pago:</p>
+                    <div class="url-display">
+                        https://www.netflix-renovacion.com/login
+                    </div>
+                `,
+                answer: "phishing",
+                explanation: "Este dominio es completamente falso y busca robar credenciales de Netflix.",
+                redFlags: [
+                    "El dominio real es 'netflix.com', no variaciones",
+                    "'netflix-renovacion.com' es un dominio completamente diferente",
+                    "Netflix nunca usa subdominios o dominios alternativos para login",
+                    "Siempre accede a Netflix escribiendo 'netflix.com' directamente",
+                    "Los emails de Netflix genuinos te dirigen a 'netflix.com'"
+                ]
+            },
+            {
+                type: "SMS",
+                icon: "📱",
+                title: "Sorteo Promocional",
+                content: `
+                    <div class="message-bubble">
+                        🎉 ¡FELICIDADES!<br><br>
+                        Has sido seleccionado como ganador en el sorteo de El Corte Inglés.<br><br>
+                        Premio: iPhone 15 Pro Max<br><br>
+                        Para reclamar tu premio, accede ahora:<br>
+                        🔗 sorteo-eci.com/premio<br><br>
+                        Código de validación: #ECI-2026-WIN<br>
+                        Válido solo durante las próximas 3 horas.
+                    </div>
+                `,
+                answer: "phishing",
+                explanation: "Este es un fraude clásico de 'premio falso' o 'sorteo fantasma'.",
+                redFlags: [
+                    "Nunca has participado en ningún sorteo de El Corte Inglés",
+                    "Los sorteos legítimos nunca notifican ganadores por SMS aleatorios",
+                    "Urgencia artificial: 'válido solo 3 horas'",
+                    "El dominio 'sorteo-eci.com' no es oficial (el real es elcorteingles.es)",
+                    "Intentan que actúes rápido sin pensar"
+                ]
+            },
+            {
+                type: "Instagram",
+                icon: "📸",
+                title: "Verificación de Cuenta",
+                content: `
+                    <div class="scenario-box">
+                        <div class="scenario-label">Mensaje Directo</div>
+                        <div style="padding-top:1rem;">
+                            <strong>instagram_official_verify</strong> • Siguiendo<br><br>
+                            ✅ Verificación Oficial de Instagram<br><br>
+                            Tu cuenta ha sido seleccionada para recibir la insignia azul verificada de forma gratuita.<br><br>
+                            Para completar el proceso de verificación, haz clic aquí:<br>
+                            🔗 instagram-verification.net<br><br>
+                            Necesitarás confirmar tu identidad con tu usuario y contraseña.<br><br>
+                            Este proceso gratuito solo está disponible por tiempo limitado.
+                        </div>
+                    </div>
+                `,
+                answer: "phishing",
+                explanation: "Este es un fraude dirigido a robar cuentas de Instagram.",
+                redFlags: [
+                    "Instagram NUNCA ofrece verificación gratuita por mensaje directo",
+                    "El nombre de usuario 'instagram_official_verify' no es oficial",
+                    "Pide 'confirmar identidad con usuario y contraseña' (¡robo directo!)",
+                    "El dominio 'instagram-verification.net' no es de Instagram",
+                    "La verificación se solicita desde la app, no por enlaces externos"
+                ]
+            },
+            {
+                type: "Email",
+                icon: "📧",
+                title: "Alerta de Seguridad Microsoft",
+                content: `
+                    <div class="email-header">
+                        <div class="email-field">
+                            <strong>De:</strong>
+                            <span>account-security-noreply@accountprotection.microsoft.com</span>
+                        </div>
+                        <div class="email-field">
+                            <strong>Asunto:</strong>
+                            <span>Actividad de inicio de sesión inusual</span>
+                        </div>
+                    </div>
+                    <p>Hola,</p>
+                    <p>Detectamos un inicio de sesión en tu cuenta de Microsoft desde un nuevo dispositivo:</p>
+                    <p><strong>Ubicación:</strong> Madrid, España<br>
+                    <strong>Dispositivo:</strong> Chrome en Windows<br>
+                    <strong>Fecha:</strong> 25 de enero de 2026, 13:45</p>
+                    <p>Si fuiste tú, puedes ignorar este mensaje.</p>
+                    <p>Si no reconoces esta actividad, <a href="https://account.microsoft.com/security">revisa tu actividad reciente</a>.</p>
+                    <p style="font-size:0.85em;color:#666;">Microsoft respeta tu privacidad. <a href="#">Más información</a>.</p>
+                `,
+                answer: "real",
+                explanation: "Este es un email de seguridad legítimo de Microsoft.",
+                redFlags: [
+                    "✅ Dominio auténtico: 'accountprotection.microsoft.com' (subdominio oficial)",
+                    "✅ No solicita contraseñas ni información personal",
+                    "✅ El enlace lleva a 'account.microsoft.com' (dominio real)",
+                    "✅ Proporciona información detallada: ubicación, dispositivo, fecha",
+                    "✅ No genera urgencia ni amenazas, solo informa"
+                ]
+            },
+            {
+                type: "URL",
+                icon: "🔗",
+                title: "Amazon - Confirmación de Pedido",
+                content: `
+                    <p>Recibes un email confirmando tu pedido de un portátil por 1.299€ que NO has realizado. Te proporciona este enlace para "cancelar el pedido":</p>
+                    <div class="url-display">
+                        https://www.arnazon.com/cancel-order
+                    </div>
+                `,
+                answer: "phishing",
+                explanation: "Este es un tipo de phishing muy efectivo que juega con el pánico de un cargo no autorizado.",
+                redFlags: [
+                    "El dominio usa 'arnazon.com' en lugar de 'amazon.es' o 'amazon.com'",
+                    "Cambio sutil: 'm' por 'rn' (se ven muy similares visualmente)",
+                    "Estrategia psicológica: te asustas por el cargo y haces clic sin pensar",
+                    "Amazon nunca usa dominios alternativos para gestionar pedidos",
+                    "Ante dudas, accede SIEMPRE escribiendo 'amazon.es' directamente en el navegador"
+                ]
+            },
+            {
+                type: "WhatsApp",
+                icon: "💬",
+                title: "Mensaje del 'CEO'",
+                content: `
+                    <div class="message-bubble">
+                        Hola, soy Carlos Rodríguez, CEO de la empresa.<br><br>
+                        Estoy en una reunión importante y necesito que hagas una transferencia urgente.<br><br>
+                        <strong>Beneficiario:</strong> TECH SOLUTIONS SL<br>
+                        <strong>IBAN:</strong> ES91 2100 0418 4502 0005 1332<br>
+                        <strong>Cantidad:</strong> 5.000€<br>
+                        <strong>Concepto:</strong> Pago proveedor urgente<br><br>
+                        Es muy urgente, confío en tu discreción. No menciones esto a nadie hasta mañana.<br><br>
+                        Envíame el comprobante cuando lo hayas hecho.
+                    </div>
+                `,
+                answer: "phishing",
+                explanation: "Este es un ataque de 'CEO Fraud' o 'Spear Phishing' corporativo.",
+                redFlags: [
+                    "Suplantación de identidad: se hace pasar por el CEO",
+                    "Urgencia extrema para evitar que lo verifiques",
+                    "'Confío en tu discreción' busca que no consultes con nadie",
+                    "Solicitud inusual por WhatsApp en lugar de canales oficiales",
+                    "NUNCA realices transferencias sin verificar por otro medio (llamada, presencial)"
+                ]
+            },
+            {
+                type: "Email",
+                icon: "📧",
+                title: "Notificación de Google",
+                content: `
+                    <div class="email-header">
+                        <div class="email-field">
+                            <strong>De:</strong>
+                            <span>no-reply@accounts.google.com</span>
+                        </div>
+                        <div class="email-field">
+                            <strong>Asunto:</strong>
+                            <span>Código de verificación de Google</span>
+                        </div>
+                    </div>
+                    <p>Hola,</p>
+                    <p>Alguien intentó acceder a tu cuenta de Google.</p>
+                    <p>Si fuiste tú, usa este código de verificación:</p>
+                    <p style="font-size:2em;font-weight:bold;text-align:center;background:#f5f5f5;padding:20px;border-radius:8px;">G-874532</p>
+                    <p>Este código expira en 10 minutos.</p>
+                    <p>Si no intentaste iniciar sesión, <a href="https://myaccount.google.com/security">protege tu cuenta</a>.</p>
+                    <p style="font-size:0.85em;color:#666;">Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA</p>
+                `,
+                answer: "real",
+                explanation: "Este es un email auténtico de verificación en dos pasos de Google.",
+                redFlags: [
+                    "✅ Dominio oficial: 'accounts.google.com'",
+                    "✅ Formato estándar de códigos de verificación de Google",
+                    "✅ No pide contraseñas ni información personal",
+                    "✅ Incluye dirección física real de Google",
+                    "✅ El enlace lleva a 'myaccount.google.com' (dominio oficial)",
+                    "✅ Si no lo esperabas, puede ser que alguien intentó acceder - cambia tu contraseña"
+                ]
+            },
+            {
+                type: "Facebook",
+                icon: "📘",
+                title: "Publicación Sorteo",
+                content: `
+                    <div class="scenario-box">
+                        <div class="scenario-label">Publicación Patrocinada</div>
+                        <div style="padding-top:1rem;">
+                            <strong>Carrefour España</strong> • Patrocinado<br>
+                            <small style="color:#65676b;">Hace 2 horas</small><br><br>
+                            🎁 ¡GRAN SORTEO 2026! 🎁<br><br>
+                            Estamos regalando 100 tarjetas regalo de 500€ para celebrar nuestro aniversario.<br><br>
+                            <strong>Para participar:</strong><br>
+                            1️⃣ Dale "Me gusta" a esta publicación<br>
+                            2️⃣ Comparte esta publicación<br>
+                            3️⃣ Comenta "QUIERO" y rellena el formulario:<br>
+                            🔗 carrefour-sorteo2026.com<br><br>
+                            ¡Ganadores anunciados mañana!<br><br>
+                            <small>❤️ 47.3K | 💬 12.8K comentarios | 23.5K veces compartido</small>
+                        </div>
+                    </div>
+                `,
+                answer: "phishing",
+                explanation: "Este es un sorteo falso, muy común en Facebook para recopilar datos personales.",
+                redFlags: [
+                    "Carrefour oficial usa 'carrefour.es', no dominios externos para sorteos",
+                    "Las marcas serias hacen sorteos dentro de sus plataformas oficiales",
+                    "El dominio 'carrefour-sorteo2026.com' NO es de Carrefour",
+                    "Piden compartir masivamente (viralización del fraude)",
+                    "Cantidad excesiva de interacciones puede ser falsa o bots",
+                    "Urgencia: 'ganadores anunciados mañana'"
+                ]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let answered = false;
+
+        function startGame() {
+            document.getElementById('welcomeScreen').classList.add('hidden');
+            document.getElementById('gameScreen').style.display = 'block';
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const scenario = scenarios[currentQuestion];
+            const progress = ((currentQuestion + 1) / scenarios.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+
+            const questionHTML = `
+                <div class="question-header">
+                    <div class="question-icon">${scenario.icon}</div>
+                    <div>
+                        <div class="question-type">${scenario.type} • Pregunta ${currentQuestion + 1}/${scenarios.length}</div>
+                        <div class="question-title">${scenario.title}</div>
+                    </div>
+                </div>
+                
+                <div class="scenario-box">
+                    ${scenario.content}
+                </div>
+
+                <div class="action-buttons">
+                    <button class="choice-btn btn-real" onclick="submitAnswer('real')">
+                        ✅ LEGÍTIMO
+                    </button>
+                    <button class="choice-btn btn-phishing" onclick="submitAnswer('phishing')">
+                        🚨 PHISHING
+                    </button>
+                </div>
+
+                <div class="feedback" id="feedback"></div>
+            `;
+
+            document.getElementById('questionCard').innerHTML = questionHTML;
+            answered = false;
+        }
+
+        function submitAnswer(userAnswer) {
+            if (answered) return;
+            answered = true;
+
+            const scenario = scenarios[currentQuestion];
+            const correct = userAnswer === scenario.answer;
+
+            if (correct) {
+                score++;
+                document.getElementById('currentScore').textContent = score;
+            }
+
+            const feedbackDiv = document.getElementById('feedback');
+            const redFlagsHTML = scenario.redFlags.map(flag => `<li>${flag}</li>`).join('');
+
+            feedbackDiv.className = 'feedback ' + (correct ? 'correct' : 'incorrect');
+            feedbackDiv.innerHTML = `
+                <div class="feedback-header">
+                    <span class="feedback-icon">${correct ? '✅' : '❌'}</span>
+                    <span>${correct ? '¡Correcto!' : 'Incorrecto'}</span>
+                </div>
+                <div class="feedback-text">
+                    <strong>${correct ? 'Bien hecho.' : 'La respuesta correcta era: ' + (scenario.answer === 'real' ? 'LEGÍTIMO' : 'PHISHING') + '.'}</strong><br>
+                    ${scenario.explanation}
+                </div>
+                <div class="red-flags">
+                    <h4>${scenario.answer === 'phishing' ? '🚩 Señales de Alarma:' : '✅ Señales de Legitimidad:'}</h4>
+                    <ul>${redFlagsHTML}</ul>
+                </div>
+                <button class="next-btn" onclick="nextQuestion()">
+                    ${currentQuestion < scenarios.length - 1 ? 'Siguiente Pregunta →' : 'Ver Resultados 🎉'}
+                </button>
+            `;
+            feedbackDiv.style.display = 'block';
+
+            // Disable buttons
+            document.querySelectorAll('.choice-btn').forEach(btn => btn.disabled = true);
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < scenarios.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('gameScreen').style.display = 'none';
+            document.getElementById('resultsScreen').style.display = 'block';
+
+            const percentage = Math.round((score / scenarios.length) * 100);
+
+            document.getElementById('finalScore').textContent = score + '/' + scenarios.length;
+            document.getElementById('correctCount').textContent = score;
+            document.getElementById('incorrectCount').textContent = scenarios.length - score;
+            document.getElementById('percentageScore').textContent = percentage + '%';
+
+            let message = '';
+            if (percentage >= 90) {
+                message = '🏆 ¡Excelente! Eres un experto en detectar phishing.';
+            } else if (percentage >= 70) {
+                message = '👍 ¡Muy bien! Tienes buen ojo para la seguridad.';
+            } else if (percentage >= 50) {
+                message = '📚 Bien, pero aún hay margen de mejora.';
+            } else {
+                message = '⚠️ Necesitas más práctica. ¡No te preocupes, ahora sabes más!';
+            }
+
+            document.getElementById('scoreMessage').textContent = message;
+        }
+
+        function restartGame() {
+            currentQuestion = 0;
+            score = 0;
+            answered = false;
+            document.getElementById('currentScore').textContent = '0';
+            document.getElementById('resultsScreen').style.display = 'none';
+            document.getElementById('welcomeScreen').classList.remove('hidden');
+        }
+    </script>
+</body>
+
+</html>

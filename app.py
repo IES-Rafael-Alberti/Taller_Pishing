@@ -157,6 +157,173 @@ def email_demo():
     except FileNotFoundError:
         return "Error: Falta email_phishing.html"
 
+@app.route('/juego')
+def spot_the_phish_game():
+    """Juego interactivo 'Spot the Phish' para detectar phishing"""
+    ip_address = request.remote_addr
+    user_agent = request.headers.get('User-Agent')
+    log_info("JUEGO ACCEDIDO", f"IP: {ip_address} | Dispositivo: {user_agent}")
+    save_visit(ip_address, user_agent, "Spot the Phish Game")
+    
+    try:
+        with open('PruebasHTML/spot_the_phish.html', 'r', encoding='utf-8') as f:
+            return f.read()
+    except FileNotFoundError:
+        return "Error: Falta spot_the_phish.html"
+
+# --- RUTAS KIT DE SUPERVIVENCIA ---
+
+@app.route('/kit')
+@app.route('/recursos')
+def kit_recursos():
+    """Página principal del Kit de Supervivencia Anti-Phishing"""
+    try:
+        with open('PruebasHTML/kit_recursos.html', 'r', encoding='utf-8') as f:
+            return f.read()
+    except FileNotFoundError:
+        return "Error: Falta kit_recursos.html"
+
+@app.route('/recursos/checklist')
+def recursos_checklist():
+    """Checklist de verificación anti-phishing"""
+    try:
+        with open('recursos/CHECKLIST.md', 'r', encoding='utf-8') as f:
+            content = f.read()
+            # Convert markdown to simple HTML
+            html_content = f"""<!DOCTYPE html>
+            <html lang="es">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Checklist Anti-Phishing</title>
+                <style>
+                    body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1.5rem; line-height: 1.6; }}
+                    h1 {{ color: #2563eb; }}
+                    h2 {{ color: #374151; margin-top: 2rem; }}
+                    code {{ background: #f3f4f6; padding: 0.2rem 0.4rem; border-radius: 4px; }}
+                    pre {{ background: #f9fafb; padding: 1rem; border-radius: 8px; overflow-x: auto; }}
+                    ul {{ padding-left: 1.5rem; }}
+                    .back {{ display: inline-block; margin: 1rem 0; padding: 0.5rem 1rem; background: #2563eb; color: white; text-decoration: none; border-radius: 6px; }}
+                </style>
+            </head>
+            <body>
+                <a href="/kit" class="back">← Volver al Kit</a>
+                <pre>{content}</pre>
+                <a href="/kit" class="back">← Volver al Kit</a>
+            </body>
+            </html>"""
+            return html_content
+    except FileNotFoundError:
+        return "Error: Falta CHECKLIST.md"
+
+@app.route('/recursos/guia-rapida')
+def recursos_guia_rapida():
+    """Guía rápida de referencia"""
+    try:
+        with open('recursos/GUIA_RAPIDA.md', 'r', encoding='utf-8') as f:
+            content = f.read()
+            html_content = f"""<!DOCTYPE html>
+            <html lang="es">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Guía Rápida Anti-Phishing</title>
+                <style>
+                    body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1.5rem; line-height: 1.6; }}
+                    h1 {{ color: #2563eb; }}
+                    h2 {{ color: #374151; margin-top: 2rem; }}
+                    code {{ background: #f3f4f6; padding: 0.2rem 0.4rem; border-radius: 4px; }}
+                    pre {{ background: #f9fafb; padding: 1rem; border-radius: 8px; overflow-x: auto; }}
+                    .back {{ display: inline-block; margin: 1rem 0; padding: 0.5rem 1rem; background: #2563eb; color: white; text-decoration: none; border-radius: 6px; }}
+                </style>
+            </head>
+            <body>
+                <a href="/kit" class="back">← Volver al Kit</a>
+                <pre>{content}</pre>
+                <a href="/kit" class="back">← Volver al Kit</a>
+            </body>
+            </html>"""
+            return html_content
+    except FileNotFoundError:
+        return "Error: Falta GUIA_RAPIDA.md"
+
+@app.route('/recursos/herramientas')
+def recursos_herramientas():
+    """Herramientas y recursos recomendados"""
+    try:
+        with open('recursos/HERRAMIENTAS.md', 'r', encoding='utf-8') as f:
+            content = f.read()
+            html_content = f"""<!DOCTYPE html>
+            <html lang="es">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Herramientas Anti-Phishing</title>
+                <style>
+                    body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1.5rem; line-height: 1.6; }}
+                    h1 {{ color: #2563eb; }}
+                    h2 {{ color: #374151; margin-top: 2rem; }}
+                    code {{ background: #f3f4f6; padding: 0.2rem 0.4rem; border-radius: 4px; }}
+                    pre {{ background: #f9fafb; padding: 1rem; border-radius: 8px; overflow-x: auto; }}
+                    a {{ color: #2563eb; }}
+                    .back {{ display: inline-block; margin: 1rem 0; padding: 0.5rem 1rem; background: #2563eb; color: white; text-decoration: none; border-radius: 6px; }}
+                </style>
+            </head>
+            <body>
+                <a href="/kit" class="back">← Volver al Kit</a>
+                <pre>{content}</pre>
+                <a href="/kit" class="back">← Volver al Kit</a>
+            </body>
+            </html>"""
+            return html_content
+    except FileNotFoundError:
+        return "Error: Falta HERRAMIENTAS.md"
+
+@app.route('/certificado')
+def certificado():
+    """Generador de certificado de participación"""
+    nombre = request.args.get('nombre', '')
+    try:
+        with open('PruebasHTML/certificado.html', 'r', encoding='utf-8') as f:
+            return render_template_string(f.read(), nombre=nombre)
+    except FileNotFoundError:
+        # Return simple certificate if file doesn't exist
+        return render_template_string("""<!DOCTYPE html>
+        <html lang="es">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Certificado</title>
+            <style>
+                body { font-family: Georgia, serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; background: #f5f5f5; padding: 1rem; }
+                .certificate { background: white; padding: 3rem; max-width: 700px; border: 8px double #2563eb; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+                h1 { color: #2563eb; text-align: center; font-size: 2rem; margin-bottom: 2rem; }
+                .content { text-align: center; }
+                .nombre { font-size: 1.8rem; color: #667eea; font-weight: bold; margin: 2rem 0; }
+                input { font-size: 1.5rem; text-align: center; border: none; border-bottom: 2px solid #2563eb; padding: 0.5rem; width: 100%; max-width: 400px; }
+                .footer { margin-top: 3rem; text-align: center; color: #666; }
+            </style>
+        </head>
+        <body>
+            <div class="certificate">
+                <h1>🎓 Certificado de Participación</h1>
+                <div class="content">
+                    <p>Se certifica que</p>
+                    <form method="get" action="/certificado">
+                        <input type="text" name="nombre" placeholder="Tu nombre aquí" value="{{ nombre }}" autofocus>
+                    </form>
+                    <p style="margin-top: 2rem;">ha completado satisfactoriamente el</p>
+                    <h2 style="color: #667eea;">Taller de Seguridad Anti-Phishing</h2>
+                    <p>demostrando conocimientos en identificación y prevención de ataques de phishing</p>
+                    <div class="footer">
+                        <p>Enero 2026</p>
+                        <p style="margin-top: 1rem;"><a href="/kit">← Volver al Kit</a></p>
+                    </div>
+                </div>
+            </div>
+        </body>
+        </html>""", nombre=nombre)
+
 @app.route('/api/stats')
 def get_stats():
     conn = sqlite3.connect('phishing_data.db')
@@ -273,6 +440,15 @@ if __name__ == '__main__':
      
      [ESCENARIO 2] Evil Twin WiFi Portal
      > URL: http://localhost:5000/wifi
+     
+     [JUEGO EDUCATIVO] Spot the Phish
+     > URL: http://localhost:5000/juego
+     
+     [KIT DE SUPERVIVENCIA] Recursos Anti-Phishing
+     > URL: http://localhost:5000/kit
+     
+     [ADMINISTRACIÓN] Dashboard
+     > URL: http://localhost:5000/admin
      
      - Registro de IPs y Dispositivos: ACTIVADO
      - Captura de Credenciales: ACTIVADO
