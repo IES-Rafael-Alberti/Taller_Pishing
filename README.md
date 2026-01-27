@@ -51,10 +51,7 @@ Verás cómo funcionan diferentes ataques desde dentro. Es impactante ver lo fá
 
 **URL del juego:** (el instructor te la dará)
 
-### 3. Actividad Grupal (20 min)
-Trabajarás con compañeros para entender la mentalidad del atacante.
-
-### 4. Quiz Final (15 min)
+### 3. Quiz Final (15 min)
 Kahoot para cerrar y consolidar lo aprendido.
 
 ---
