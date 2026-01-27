@@ -142,7 +142,8 @@ R: Tres cosas - verifica el dominio del remitente, los bancos NUNCA piden contra
 
 **España:**
 - INCIBE (Instituto Nacional de Ciberseguridad): 017
-- Reportar phishing: https://www.incibe.es/
+- Reportar phishing: incidencias@incibe-cert.es
+- Alternativamente, se puede utilizar el formulario https://www.incibe.es/incibe-cert/incidentes/notificaciones
 
 **Tu banco:** Número en tu tarjeta (NO el del email sospechoso)
 
@@ -265,3 +266,4 @@ docker run -d -p 5000:5000 --name taller-phishing-test taller-phishing
 **Mantente alerta, mantente seguro** 🛡️
 
 </div>
+
